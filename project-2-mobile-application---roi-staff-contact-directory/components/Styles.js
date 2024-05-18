@@ -1,9 +1,23 @@
 import { StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const defaultFontSize = 16;
 
-const styles = StyleSheet.create({
+
+export const updateFontSize = async (value) => {
+  try {
+    // Save the font size to AsyncStorage
+    await AsyncStorage.setItem('fontSize', String(value));
+    console.log('Font size updated successfully.');
+   
+  } catch (error) {
+    console.error('Error updating font size:', error);
+    
+  }
+};
+
+styles = StyleSheet.create({
   container: {
     flex: 1,
-    
   },
 
   navbarContainer: {
@@ -16,23 +30,40 @@ const styles = StyleSheet.create({
   navbarLogo: {
    width: 120, 
    height: 50, 
-   
-   
      // Make the image fill the height of the container
   },
   paragraph: {
     margin: 24,
     marginTop: 20,
-    fontSize: 21,
+    fontSize: defaultFontSize + 5,
     fontFamily:'Trebuchet',
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
   },
+  subheading:{
+    margin: 10,
+    marginTop: 20,
+    fontSize: defaultFontSize + 5,
+    fontFamily:'Trebuchet',
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+  },
+
   paragrapHomeScreen: {
     margin: 24,
     marginTop: 20,
     fontSize: 30,
+    fontFamily:'Trebuchet',
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+  },
+  paragrapProfileScreen: {
+    margin: 24,
+    marginTop: 20,
+    fontSize: defaultFontSize + 14,
     fontFamily:'Trebuchet',
     fontWeight: 'bold',
     color: 'white',
@@ -68,6 +99,7 @@ const styles = StyleSheet.create({
     marginRight: 24,
     marginTop: 10,
     height: 40,
+    fontSize: 16,
     borderRadius: 10,
     backgroundColor: 'white',
     paddingLeft: 20 
@@ -75,13 +107,20 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     alignItems: 'center'
   },
+  smallButtonsContainer: {
+      alignItems: 'center'
+  },
+
+  createButtonsContainer:{
+      alignItems: 'center',
+      marginBottom: 310
+  },
   buttonContainer: {
     backgroundColor: '#981a1d',
     width: '86%',
     borderRadius: 10,
     marginBottom: 20,
-    
-    
+
   },
   searchButton: {
     backgroundColor: '#981a1d',
@@ -91,15 +130,36 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     justifyContent: 'center', 
     height: 65,
-    marginTop: 30,
+    marginTop: 10,
     borderRadius: 10,
-    marginBottom: 20,
+    marginBottom: 5,
+  },
+  smallButton: {
+    backgroundColor: '#981a1d',
+    borderColor: 'white',
+    borderWidth: 2,
+    width: '86%',
+    textAlign: 'center',
+    justifyContent: 'center', 
+    height: 40,
+    marginTop: 10,
+    borderRadius: 10,
+    marginBottom: 5,
   },
   searchButtonText: {
     alignSelf: 'center',
     justifyContent: 'center',
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: defaultFontSize + 14,
+    fontFamily: 'Trebuchet',
+    color: 'white',
+  },
+  smallButtonText: {
+    alignSelf: "center", 
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    fontSize: 16,
+    fontFamily: 'Trebuchet',
     color: 'white',
   },
    wideImage: {
@@ -122,8 +182,8 @@ const styles = StyleSheet.create({
   
   menuIconConatiner: {
     paddingLeft: 15,
-    height: 50,
-    width: 50, // Adjust the width to fit your container
+    height: 47,
+    width: 47, // Adjust the width to fit your container
     justifyContent: 'center', // Center the image vertically
     alignItems: 'center', // Center the image horizontally
 
@@ -154,12 +214,58 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: 10
   },
+  personalProfileContainer: {
+    borderRadius: 50,
+    borderColor: 'white',
+    borderWidth: 2,
+    marginRight: 15
+  },
   boldText: {
     fontWeight: 'bold',
-    fontSize: 18
+    fontSize: defaultFontSize + 2,
+    fontFamily: 'Trebuchet'
   },
-  
-  
+  inputUpdateField: {
+    width: '80%',
+    marginLeft: 24,
+    marginRight: 24,
+    marginTop: 10,
+    height: 40,
+    fontSize: 16,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    paddingLeft: 20 
+  },
+  updateProfileContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginTop: 20,
+    marginBottom: 220
+    
+  },
+  sliderContainer: {
+    alignItems: 'center'
+  },
+  settingsContainer: {
+    backgroundColor: '#981a1d',
+    width: '86%',
+    borderRadius: 10,
+    marginBottom: 20,
+    paddingTop: 5,
+    paddingLeft: 5,
+    paddingRight: 5
+    
+  },
+  slider: {
+    width: '80%',
+    height: 40,
+  },
+  valueText: {
+    color: 'white',
+    fontSize: defaultFontSize + 2,
+    fontFamily: 'Trebuchet',
+    marginBottom: 10
+  }
   
 });
 

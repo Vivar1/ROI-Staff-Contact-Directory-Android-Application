@@ -1,13 +1,31 @@
-import { Text, View, StyleSheet, ImageBackground, SafeAreaView, TextInput,Button } from 'react-native';
-import styles from './Styles.js';
-import React, { useState } from 'react';
+import { Text, View, StyleSheet, ImageBackground, SafeAreaView, TextInput,Button, Alert, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import credentialsJson from '../assets/data/usernamePassword.json'
 
 
-
-export default function HomePage( {navigation} ) {
+export default function LoginPage( {navigation} ) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [usernamePassword, setUsernamePassword] = useState([]);
+
+  /**
+   * Fetch the detials for the credentials for the users 
+   */
  
+
+    
+  useEffect(() => {
+    // Set the credential data when the component mounts
+    setUsernamePassword(credentialsJson);
+
+    
+  }, []);
+
+/*
+ * Check that the data is loaded for the usernames and passwords. 
+ */
+  console.log(usernamePassword)
+
 
   const handleUsernameChange = (text) => {
     setUsername(text);
@@ -17,16 +35,17 @@ export default function HomePage( {navigation} ) {
     setPassword(text);
   }
 
-  const handleLogin = (navigation) => {
-  // Redirect to HomePage
-    
- 
-}
+const handleLogin = () => {
+  const foundUser = usernamePassword.find(user => user.username === username && user.password === password); 
 
-
-  const handleSignUp = () => {
-    
+  if(foundUser) {
+    navigation.navigate("HomePage");
+  }else{
+    Alert.alert("Login Failed", "Incorrect username or password");
   }
+};
+
+ 
   
   return (
     
@@ -55,21 +74,41 @@ export default function HomePage( {navigation} ) {
           
       </View>
       <View style={styles.buttonsContainer}> 
-        <View style={styles.buttonContainer}>
-            <Button title="Login" onPress={() => navigation.navigate("HomePage")} color='#fff' />
-        </View>
-        <View style={styles.buttonContainer}>
-            <Button  title="Forgot Password" onPress={() => navigation.navigate("HomePage")} color='#fff' />
-        </View>
+        
+            <View style={styles.smallButton}>
+              <TouchableOpacity onPress={handleLogin}>
+                <Text style={styles.smallButtonText}>Login</Text>
+              </TouchableOpacity>
+            </View>
+         
+           
+            <View style={styles.smallButton}>
+              <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
+                <Text style={styles.smallButtonText}>Forgot Password</Text>
+              </TouchableOpacity>
+            </View>
+          
+            <View style={styles.smallButton}>
+              <TouchableOpacity onPress={() => navigation.navigate("HomePage")}>
+                <Text style={styles.smallButtonText}>Quick Entry</Text>
+              </TouchableOpacity>
+            </View>
+          
+
 
         <Text style={styles.paragraph}>
          Forgot Username or Password:
       </Text>
-        
+
+
         <Text style={styles.smallparagraph}>
-        
-Please Click Forgot Login Details to reset your username and password. If you are unable to do so please contact your sectors IT administrator.
+       
+          Please Click Forgot Login Details to reset your username and password. If you are unable to do so please contact your sectors IT administrator.{"\n"}{"\n"} <Text style={styles.boldText}>Login using credentials</Text>{"\n"} USERNAME: <Text style={styles.boldText}> Andrew</Text>{"\n"} PASSWORD: <Text style={styles.boldText}> tafensw </Text> 
       </Text>
+
+    
+
+
       </View>
     </View>
     </ImageBackground>
@@ -79,6 +118,5 @@ Please Click Forgot Login Details to reset your username and password. If you ar
 
   );
 }
-
 
 
