@@ -73,6 +73,9 @@ const handleLogin = () => {
 
           
       </View>
+      /**
+      * Update the buttons to ensure styling is both viable for android and iphone useage. 
+      */
       <View style={styles.buttonsContainer}> 
         
             <View style={styles.smallButton}>
